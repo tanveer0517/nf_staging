@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- sending a mail for employee  on submit -->
+   		<record id="employee_transfer_submit_mail" model="mail.template">
+          <field name="name">Employee Transfer Submit</field>
+          <field name="email_from">${object.company_id and object.company_id.email or ''|safe}</field>
+          <field name="subject">Employee Transfer Request for ${object.employee_id.name_related}</field>
+          <field name="email_to">${object.employee_id.work_email|safe},${object.manager_id.work_email|safe}</field>
+          <field name="lang">${object.lang}</field>
+          <field name="model_id" ref="employee_transfer.model_employee_transfer"/>
+          <field name="auto_delete" eval="True"/>
+	      <field name="body_html">
+            <![CDATA[
+            <p>Dear ${object.manager_id.name_related},<br></br>
+            <br></br>
+            Transfer request for ${object.employee_id.name_related} has been created in ERP. The new manager for ${object.employee_id.name_related} will be ${object.new_manager_id.name_related}.
+			<br></br>
+			<br></br>
+			Please confirm the same in ERP.
+			<br></br>
+			Thanks
+			</p>
+	    	]]>
+	  	  </field>
+        </record>
+
+                <!-- manager approval mail -->
+        <record id="emloyee_transfer_manager_approve" model="mail.template">
+          <field name="name">Employee Transfer Approved By Manager</field>
+          <field name="email_from">${object.company_id and object.company_id.email or ''|safe}</field>
+          <field name="subject">Employee Transfer Request for ${object.employee_id.name_related}</field>
+          <field name="email_to">${object.employee_id.work_email|safe},${object.new_manager_id.work_email|safe}</field>
+          <field name="lang">${object.lang}</field>
+          <field name="model_id" ref="employee_transfer.model_employee_transfer"/>
+          <field name="auto_delete" eval="True"/>
+	      <field name="body_html">
+            <![CDATA[
+            <p>Dear ${object.new_manager_id.name_related},<br></br>
+            <br></br>
+            Transfer request for ${object.employee_id.name_related} has been created in ERP and the same is approved by ${object.manager_id.name_related}. Now you will be the manager for ${object.employee_id.name_related}.
+
+			<br></br>
+   			<br></br>
+    		Please confirm the same in ERP.
+			<br></br>
+			Thanks
+			</p>
+	    	]]>
+	  	  </field>
+        </record>
+
+
+                <!-- new manager approval mail -->
+        <record id="emloyee_transfer_new_manager_approve" model="mail.template">
+          <field name="name">Employee Transfer Approved By New Manager</field>
+          <field name="email_from">${object.company_id and object.company_id.email or ''|safe}</field>
+          <field name="subject">Employee Transfer Request for ${object.employee_id.name_related}</field>
+          <field name="email_to">${object.employee_id.work_email|safe},${object.manager_id.work_email|safe}</field>
+          <field name="lang">${object.lang}</field>
+          <field name="model_id" ref="employee_transfer.model_employee_transfer"/>
+          <field name="auto_delete" eval="True"/>
+	      <field name="body_html">
+            <![CDATA[
+            <p>Dear All,<br></br>
+            <br></br>
+            Transfer request for ${object.employee_id.name_related} has been created in ERP and the same is approved by ${object.manager_id.name_related} and ${object.new_manager_id.name_related}.
+			<br></br>
+			Thanks
+			</p>
+	    	]]>
+	  	  </field>
+        </record>
+
+                <!-- manager approval mail -->
+        <record id="emloyee_transfer_manager_reject" model="mail.template">
+          <field name="name">Employee Transfer Rejected</field>
+          <field name="email_from">${object.company_id and object.company_id.email or ''|safe}</field>
+          <field name="subject">Employee Transfer Request for ${object.employee_id.name_related}</field>
+          <field name="email_to">${object.employee_id.work_email|safe},${object.manager_id.work_email|safe}</field>
+          <field name="lang">${object.lang}</field>
+          <field name="model_id" ref="employee_transfer.model_employee_transfer"/>
+          <field name="auto_delete" eval="True"/>
+	      <field name="body_html">
+            <![CDATA[
+            <p>Dear ${object.new_manager_id.name_related},<br></br>
+            <br></br>
+            Transfer request for ${object.employee_id.name_related} has been created in ERP and the same is rejected by ${object.write_uid.name}.
+			<br></br>
+			Thanks
+			</p>
+	    	]]>
+	  	  </field>
+        </record>
+
+    </data>
+</openerp>

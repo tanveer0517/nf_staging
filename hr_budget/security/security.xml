@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+       <record id="employee_resignation_access_rule_id" model="ir.rule">
+            <field name="name">Employee Resignation</field>
+            <field name="model_id" ref="model_resign"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                ['|','|',('c_user_id','=',user.id),('c_man_user_id','=',user.id),('c_rep_mngr_user','=',user.id)]
+            </field>
+        </record>
+        
+        <record id="employee_officer_resignation_access_rule_id" model="ir.rule">
+            <field name="name">Officer Resignation</field>
+            <field name="model_id" ref="model_resign"/>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [(1,'=',1)]
+            </field>
+        </record>
+
+        <record id="employee_manager_resignation_access_rule_id" model="ir.rule">
+            <field name="name">Manager Resignation</field>
+            <field name="model_id" ref="model_resign"/>
+            <field name="groups" eval="[(4, ref('hr.group_hr_manager'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [(1,'=',1)]
+            </field>
+        </record>
+        
+        
+        <record id="employee_termination_access_rule_id" model="ir.rule">
+            <field name="name">Employee Termination</field>
+            <field name="model_id" ref="model_termination"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                ['|','|',('c_user_id','=',user.id),('c_man_user_id','=',user.id),('c_rep_mngr_user','=',user.id)]
+            </field>
+        </record>
+        
+        <record id="employee_officer_termination_access_rule_id" model="ir.rule">
+            <field name="name">Officer Termination</field>
+            <field name="model_id" ref="model_termination"/>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [(1,'=',1)]
+            </field>
+        </record>
+
+        <record id="employee_manager_termination_access_rule_id" model="ir.rule">
+            <field name="name">Manager Termination</field>
+            <field name="model_id" ref="model_termination"/>
+            <field name="groups" eval="[(4, ref('hr.group_hr_manager'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [(1,'=',1)]
+            </field>
+        </record>
+
+        <record id="medical_insurance_access_rule_id" model="ir.rule">
+            <field name="name">Employee Medical Insurance</field>
+            <field name="model_id" ref="model_medical_insurance"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('employee_id.user_id','=',user.id)]
+            </field>
+        </record>
+        
+        <record id="medical_insurance_termination_access_rule_id" model="ir.rule">
+            <field name="name">Manager Medical Insurance</field>
+            <field name="model_id" ref="model_medical_insurance"/>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [(1,'=',1)]
+            </field>
+        </record>
+
+        <record id="group_fos" model="res.groups">
+            <field name="name">FOS</field>
+        </record>
+
+        <record id="group_cf" model="res.groups">
+            <field name="name">CF</field>
+        </record>
+
+        <record id="group_channel" model="res.groups">
+            <field name="name">Channel</field>
+        </record>
+
+        <record id="group_enterprise" model="res.groups">
+            <field name="name">Enterprise</field>
+        </record>
+
+        <record id="fos_manager_resignation_access_rule_id" model="ir.rule">
+            <field name="name">FOS Manager Resignation</field>
+            <field name="model_id" ref="model_resign"/>
+            <field name="groups" eval="[(4, ref('hr_budget.group_fos'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('name.sub_dep.name','in',['FOS', 'FOS-HQ'])]
+            </field>
+        </record>
+
+        <record id="cf_manager_resignation_access_rule_id" model="ir.rule">
+            <field name="name">CF Manager Resignation</field>
+            <field name="model_id" ref="model_resign"/>
+            <field name="groups" eval="[(4, ref('hr_budget.group_cf'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('name.sub_dep.name','in',['FOS-CF','Renewals - FOS'])]
+            </field>
+        </record>
+
+        <record id="channel_manager_resignation_access_rule_id" model="ir.rule">
+            <field name="name">Channel Manager Resignation</field>
+            <field name="model_id" ref="model_resign"/>
+            <field name="groups" eval="[(4, ref('hr_budget.group_channel'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('name.sub_dep.name','in',['Channel', 'Channel-HQ'])]
+            </field>
+        </record>
+
+        <record id="enterprise_manager_resignation_access_rule_id" model="ir.rule">
+            <field name="name">Enterprise Manager Resignation</field>
+            <field name="model_id" ref="model_resign"/>
+            <field name="groups" eval="[(4, ref('hr_budget.group_enterprise'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('name.sub_dep.name','in',['Enterprise'])]
+            </field>
+        </record>
+
+        <record id="fos_manager_termination_access_rule_id" model="ir.rule">
+            <field name="name">FOS Manager Resignation</field>
+            <field name="model_id" ref="model_termination"/>
+            <field name="groups" eval="[(4, ref('hr_budget.group_fos'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('name.sub_dep.name','in',['FOS', 'FOS-HQ'])]
+            </field>
+        </record>
+
+        <record id="cf_manager_termination_access_rule_id" model="ir.rule">
+            <field name="name">CF Manager Resignation</field>
+            <field name="model_id" ref="model_termination"/>
+            <field name="groups" eval="[(4, ref('hr_budget.group_cf'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('name.sub_dep.name','in',['FOS-CF','Renewals - FOS'])]
+            </field>
+        </record>
+
+        <record id="channel_manager_termination_access_rule_id" model="ir.rule">
+            <field name="name">Channel Manager Resignation</field>
+            <field name="model_id" ref="model_termination"/>
+            <field name="groups" eval="[(4, ref('hr_budget.group_channel'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('name.sub_dep.name','in',['Channel', 'Channel-HQ'])]
+            </field>
+        </record>
+
+        <record id="enterprise_manager_termination_access_rule_id" model="ir.rule">
+            <field name="name">Enterprise Manager Resignation</field>
+            <field name="model_id" ref="model_termination"/>
+            <field name="groups" eval="[(4, ref('hr_budget.group_enterprise'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <field name="domain_force">
+                [('name.sub_dep.name','in',['Enterprise'])]
+            </field>
+        </record>
+        
+</data>             
+</openerp>        
